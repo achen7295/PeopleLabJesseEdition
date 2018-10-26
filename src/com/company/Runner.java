@@ -7,13 +7,15 @@ public class Runner {
 
     // Methods
     public static void main(String[] args) {
-        int classSize = 36;
+        int classSize = 6;
 
         Teacher ourTeacher = new Teacher("Nathan","Folwell","AP Java","Mr");
 
-        Student[] ourStudents = new Student[classSize];
+        Student[][] ourStudents = new Student[classSize][classSize];
         for (int i = 0; i < classSize; i ++) {
-            ourStudents[i] = randomStudent();
+            for (int x = 0; x < classSize; x ++) {
+                ourStudents[i][x] = randomStudent();
+            }
         }
 
         Classroom ourClassroom = new Classroom(ourStudents, ourTeacher);

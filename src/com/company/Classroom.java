@@ -2,21 +2,19 @@ package com.company;
 
 public class Classroom {
     // Fields
-    private Student[] students;
+    private Student[][] students;
     private Teacher teacher;
-    private Student[][] seatingChart = new Student[6][6];
 
     // Constructor
-    public Classroom(Student[] students, Teacher teacher) {
+    public Classroom(Student[][] students, Teacher teacher) {
         this.students = students;
         this.teacher = teacher;
-        fillSeats();
     }
 
     // Methods
 
     // Getters
-    public Student[] getStudents() {
+    public Student[][] getStudents() {
         return students;
     }
     public Teacher getTeacher() {
@@ -24,7 +22,7 @@ public class Classroom {
     }
 
     // Setters
-    public void setStudents(Student[] students) {
+    public void setStudents(Student[][] students) {
         this.students = students;
     }
     public void setTeacher(Teacher teacher) {
@@ -39,10 +37,13 @@ public class Classroom {
     public double classAverage() {
         double sum = 0;
 
-        for (Student cur : students)
-            sum += cur.getGPA();
+        for (int i = 0; i < students.length; i ++) {
+            for (int x = 0; x < students[i].length; x ++) {
+                sum += students[i][x].getGPA();
+            }
+        }
 
-        return sum / students.length;
+        return sum / (students.length * students[0].length);
     }
 
     /**
@@ -53,21 +54,13 @@ public class Classroom {
         String studentString = "";
 
         for (int i = 0; i < students.length; i++) {
-            studentString += "\n" + (i + 1) + ". " + students[i].toString();
+            for (int x = 0; x < students[i].length; x ++) {
+                studentString += "\n" + ((6 * i) + 1 + x) + ". " + students[i][x].toString();
+            }
         }
 
         return "Teacher: " + teacher.toString() +
                 "\nSubject: " + teacher.getSubject() +
                 "\nStudents: " + studentString;
-    }
-
-    private void fillSeats() {
-        int idx = 0;
-        for (Student[] studentArr : seatingChart) {
-            for (int i = 0; i < studentArr.length; i++) {
-                studentArr[i] = students[idx];
-                idx++;
-            }
-        }
     }
 }

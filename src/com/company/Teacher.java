@@ -40,4 +40,3 @@ public class Teacher extends Person {
         return title + ". " + getFamilyName();
     }
 }
-
